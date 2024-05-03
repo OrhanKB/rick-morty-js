@@ -68,3 +68,20 @@ span{
     background-color: rgb(68, 68, 68);
 }
 
+
+#alive-btn > button, #dead-btn > button, #unkown-btn > button {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    top: -10px;
+    left: 70px;
+    background-color: #27272a;
+    display: none;
+}
+
+div > span {
+    margin-left: 5px;
+}
+
+
+

@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Rick And Morty</title>
         <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="../styles/characters.css">
     </head>
+
     <body style="background: rgb(68, 68, 68);">
 
         <header class="d-flex flex-column align-items-center">
@@ -24,9 +25,30 @@
         <main class="mt-5">
 
             <div class="buttons d-flex justify-content-center gap-3">
-                <button class="rounded-pill text-light btn btn-outline-secondary">Alive</button>
-                <button class="rounded-pill text-light btn btn-outline-secondary">Dead</button>
-                <button class="rounded-pill text-light btn btn-outline-secondary">Unknown</button>
+
+                <div id="alive-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative">
+                    <span>Alive</span>
+                    <button class="button-close-alive close-button btn text-light rounded-circle    
+                     justify-content-center align-items-center position-absolute">
+                        X
+                    </button>
+                </div>
+
+                <div id="dead-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative">
+                    <span>Dead</span>
+                    <button class="button-close-dead close-button btn text-light rounded-circle 
+                     justify-content-center align-items-center position-absolute">
+                        X
+                    </button>
+                </div>
+
+                <div id="unkown-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative">
+                    <span>Unknown</span>
+                    <button class="button-close-unknown close-button btn text-light rounded-circle
+                     justify-content-center align-items-center position-absolute">
+                        X
+                    </button>
+                </div>
             </div>
 
             <div class="container mt-5">
