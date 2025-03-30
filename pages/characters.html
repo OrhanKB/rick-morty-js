@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Rick And Morty</title>
+        <title>Rick and Morty</title>
         <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="../styles/characters.css">
+        <link rel="stylesheet" href="../styles/pagination.css">
     </head>
 
     <body style="background: rgb(68, 68, 68);">
@@ -24,43 +25,52 @@
 
         <main class="mt-5">
 
-            <div class="buttons d-flex justify-content-center gap-3">
+            <div class="buttons d-flex justify-content-center gap-3 js-container-btns">
 
-                <div id="alive-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative">
+                <div id="alive-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative js-alive-btn" data-action="filter">
                     <span>Alive</span>
                     <button class="button-close-alive close-button btn text-light rounded-circle    
-                     justify-content-center align-items-center position-absolute">
+                     justify-content-center align-items-center position-absolute" data-action="close">
                         X
-                    </button>
+                    </button> 
                 </div>
+                
 
-                <div id="dead-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative">
+
+                <div id="dead-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative js-dead-btn" data-action="filter">
                     <span>Dead</span>
                     <button class="button-close-dead close-button btn text-light rounded-circle 
-                     justify-content-center align-items-center position-absolute">
+                     justify-content-center align-items-center position-absolute" data-action="close">
                         X
                     </button>
                 </div>
 
-                <div id="unkown-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative">
+                <div id="unkown-btn" class="rounded-pill text-light btn btn-outline-secondary position-relative js-unknown-btn" data-action="filter">
                     <span>Unknown</span>
                     <button class="button-close-unknown close-button btn text-light rounded-circle
-                     justify-content-center align-items-center position-absolute">
+                     justify-content-center align-items-center position-absolute" data-action="close">
                         X
                     </button>
                 </div>
             </div>
 
             <div class="container mt-5">
-                <div id="row-div" class="row d-flex justify-content-center">
-
+                <div id="row-div" class="row d-flex justify-content-center js-characters">
+                    
                 </div>
             </div>
-
         </main>
 
-        <script src="/src/data/getCharacters.js"></script>
-        <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <!--PAGINATION-->
+        <nav class="ml-5 pagination-nav" aria-label="...">
+            <ul class="pagination"> 
+                
+            </ul>
+          </nav>
+
+        
+        <script type="module" src="/script/characters.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script> 
     </body>
     </html>
 
