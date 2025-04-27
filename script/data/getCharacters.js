@@ -1,22 +1,21 @@
-    
-   
-  import { renderCharacters } from "../characters.js";
-       
-    export const urlString = {
-      urlOutside : "https://rickandmortyapi.com/api/character",
-      data : undefined,
-    }    
+   import { renderCharacters } from "../characters.js";
+  import { urlString, getCharacters} from "./state.js";
+  import { renderPagination } from "./pagination.js";
 
     // CATEGORIZING BUTTONS
     const buttonConfig = {
         ".js-alive-btn" : {status: "alive", closeButton: "button-close-alive"},
         ".js-dead-btn" : {status: "dead", closeButton: "button-close-dead"},
         ".js-unknown-btn": {status: "unknown", closeButton: "button-close-unknown"}
-    }    
+    }
     
     async function handleButtonClick(event) {
         const button = event.target.closest("[data-action]");
-       
+
+      const [urlBase, queryString] = urlString.urlOutside.split("?");
+      const params = new URLSearchParams(queryString);
+        
+
         if (!button) return;
       
         const action = button.getAttribute("data-action");
@@ -25,76 +24,54 @@
             button.classList.contains("button-close-dead") || 
             button.classList.contains("button-close-unknown")) {
           event.stopPropagation(); // Stop event bubbling
-        } 
-
-        if (action === "filter") {
+        }      
+        
+        if (action === "filter") { 
 
           const buttonClass = Array.from(button.classList).find(cls => "."+cls in buttonConfig);
 
           if (!buttonClass) return;
             
-       
          const {status, closeButton} = buttonConfig["." + buttonClass];
          
          const allCloseButtons = document.querySelectorAll(`[data-action="close"]`)
-          //
-          urlString.urlOutside = `https://rickandmortyapi.com/api/character?status=${status}`;
+        
+         params.has("status") ? params.set("status", status) : params.append("status", status)
+          urlString.urlOutside = `${urlBase}?${params}`
           document.querySelector("."+closeButton).style.display = "flex";
           
           allCloseButtons.forEach((button) => {
             button.classList[0] !== closeButton ? button.style.display = "none" : [];
-              
-          })
-          
-        
+          });
+
         } else if (action === "close") {
-          
-          urlString.urlOutside = "https://rickandmortyapi.com/api/character";
+         params.delete("status");
+          urlString.urlOutside =  `${urlBase}?${params.toString()}`
+            
           button.style.display = "none";
         }
-
+  if (Number(params.get("page")) >= urlString.data.info.pages) {
+          params.set("page", 1);
+          urlString.urlOutside = `${urlBase}?${params}`
+        }
         urlString.data = await getCharacters();
+        // pagination number adjuster to prevent error       
+        
         renderCharacters();
+        renderPagination();
+        
       }
-      
-      
       function setupEventListeners() {
+        
         const container = document.querySelector(".js-container-btns"); 
         container.addEventListener("click", handleButtonClick)
-        
       }
       // CATEGORIZING BUTTONS
-     
-export async function getCharacters ()  {
-
-    try{ //
-         const url = await urlString.urlOutside; 
-        
-         const response = await fetch(url)
-      
-        
-
-        if(!response.ok) {
-            throw new Error("Bad response")
-        };
-
-        const data = await response.json();
-        return data;
-       
-     } catch(error) {
-        console.log("error:", error)
-    }
-    
-}
-
-  setupEventListeners();
-  urlString.data = await getCharacters();
-
-
-  
-   
+ 
+  setupEventListeners();  
   
 
+  
 
 
 

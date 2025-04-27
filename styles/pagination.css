@@ -13,3 +13,23 @@
 .js-prev-page {
     display: none;
 }
+
+.pagination > button {
+    background-color: #27272a;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.pagination > button:hover {
+    background-color: gray;
+}
+
+button:disabled {
+    background-color: #27272a;
+    border-color: black;
+    color: white;
+    cursor: not-allowed;
+    
+}

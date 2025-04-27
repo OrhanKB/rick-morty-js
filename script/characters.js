@@ -1,5 +1,5 @@
-import {urlString} from "./data/getCharacters.js";
-import "./data/pagination.js";
+import { getCharacters, urlString } from "./data/state.js";
+import "./data/getCharacters.js"
 
 
 export function renderCharacters() {
@@ -11,8 +11,6 @@ export function renderCharacters() {
         function characterStatus(character) {
         return  character.status === "Alive" ? "../public/activity.png" : "../public/icons8-skull-50.png";    
         }
-
-
 
         cardHTML = cardHTML+= `
         <div class="col-sm-4">
@@ -30,13 +28,11 @@ export function renderCharacters() {
 </div>
         `;
 
-
     })
-
         document.querySelector(".js-characters").innerHTML = cardHTML;
     }
-
      
     renderCharacters();
+
 
     

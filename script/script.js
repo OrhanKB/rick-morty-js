@@ -3,7 +3,7 @@ const locations = document.querySelector("#locations")
 const favorites = document.querySelector("#favorites")
 
 characters.addEventListener("click", e => {
-    document.location.href = "../src/pages/characters.html"
+    document.location.href = "/pages/characters.html"
 } 
 );
 
