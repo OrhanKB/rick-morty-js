@@ -4,10 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rick and Morty</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../styles/characters.css">
+    <link rel="stylesheet" href="../styles/character-details.css">
 </head>
-<body>
-    
+<body style="background-color:rgb(68, 68, 68) ;width: 100%;">
+    <!--HEADER NAV-->
+    <header class="d-flex flex-column align-items-center">
+        <a href="#" class="arrow-left position-relative">
+            <img src="/public/arrow-89-24.png" alt="">
+        </a>
+        <a class="border border-black d-flex justify-content-center pt-1" href="/pages/index.html">
+        <img style="width: 160px; height: 50px;" src="/public/logo.png" alt="">
+        </a>
+    </header>
+    <!--HEADER NAV-->
 
-    
+    <!--MAIN STATUS-->
+    <div class="container mt-5 detail-container justify-content-center">
+        
+    </div>
+    <!--MAIN STATUS-->
+
+    <!--OTHER CHARACTERS-->
+    <div  class="container mt-5   other-characters">
+        <div class="row text-start">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <img src="" alt="">
+                <div class="details">
+                    <p>Summer Smith</p>
+                    <p>Earth</p>
+                    <p>Human/female</p>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <img src="" alt="">
+                <div class="details">
+                    <p>Beth Smith</p>
+                    <p>Earth</p>
+                    <p>Human/female</p>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <img src="" alt="">
+                <div class="details">
+                    <p>Jerry Smith</p>
+                    <p>Earth</p>
+                    <p>Human/female</p>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <img src="" alt="">
+                <div class="details">
+                    <p>Blim Blam</p>
+                    <p>Earth</p>
+                    <p>Alien/male</p>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    <!--OTHER CHARACTERS-->
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="module" src="/script/renderCharacterDetails.js"></script>
 </body>
 </html>

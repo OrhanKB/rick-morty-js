@@ -1,7 +1,7 @@
  import {renderCharacters} from "../characters.js";
  import { urlString, getCharacters } from "./state.js";
  
-const paginationDiv = document.querySelector(".pagination");
+ const paginationDiv = document.querySelector(".pagination");
 
 export function renderPagination() {
     const totalPage = urlString.data.info.pages;

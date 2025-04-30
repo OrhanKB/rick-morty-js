@@ -4,7 +4,6 @@
     urlPages: undefined,
   }
   
-
   export async function getCharacters ()  {
    
      try{ 
@@ -30,9 +29,6 @@
   
 
 urlString.data = await getCharacters(); 
-
-console.log("urlstring data:", urlString)
-
 
 
 

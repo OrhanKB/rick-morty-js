@@ -1,6 +1,7 @@
    import { renderCharacters } from "../characters.js";
   import { urlString, getCharacters} from "./state.js";
   import { renderPagination } from "./pagination.js";
+  
 
     // CATEGORIZING BUTTONS
     const buttonConfig = {
@@ -50,7 +51,8 @@
             
           button.style.display = "none";
         }
-  if (Number(params.get("page")) >= urlString.data.info.pages) {
+        //pagination number adjuster to prevent error
+        if (Number(params.get("page")) >= urlString.data.info.pages) {
           params.set("page", 1);
           urlString.urlOutside = `${urlBase}?${params}`
         }
@@ -69,6 +71,7 @@
       // CATEGORIZING BUTTONS
  
   setupEventListeners();  
+
   
 
   

@@ -1,0 +1,10 @@
+.status-head {
+    font-weight: 600;
+    font-size:larger;
+    margin: 0px;
+}
+
+.status-input {
+    font-weight: 100;
+    font: italic;
+}
