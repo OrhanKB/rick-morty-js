@@ -74,11 +74,11 @@ function renderOtherCharacters() {
 
     parsedOtherCharactersData.forEach((character) => {
         
-        otherCharactersHtml += `
-            <div class="col-sm-4 mb-3"> 
-                <div class="d-flex align-items-center"> 
-                    <img class="details-img rounded-circle" src="${character.image}"  alt="${character.name}" object-fit: cover;  > 
-                    <div class="details  flex-grow-1  overflow-hidden "> 
+        otherCharactersHtml += `      
+            <div style="cursor: default" class="col-sm-4 mb-3"> 
+                <div style="cursor: pointer" class="d-flex align-items-center"> 
+                    <img class="details-img rounded-circle" src="${character.image}"  alt="${character.name}" object-fit: cover;> 
+                    <div class="details  flex-grow-1  overflow-hidden m-3"> 
                         <p class="details-name mb-1 text-truncate">${character.name}</p>
                         <p class="details-location mb-1 text-truncate">${character.location.name}</p>
                         <p class="details-species text-truncate">${character.species}/${character.gender}</p>
@@ -96,7 +96,9 @@ function renderOtherCharacters() {
 
 const noDataFoundDiv = document.querySelector(".no-data-found");
 
-parsedOtherCharactersData[0] === null ? noDataFoundDiv.style.opacity = 1 : [] ;
+parsedOtherCharactersData.length === 0 ? parsedOtherCharactersData[0] = null :  [] ;
+parsedOtherCharactersData[0] === null  ?  noDataFoundDiv.style.opacity = 1 : [] ;
+
 
 
 renderOtherCharacters();

@@ -44,6 +44,7 @@ async function matchedCharacterId(event) {
     }
 
     const allData = await otherCharacters();    
+    
 
      const getRandomData = () => {
             const selectedNums = [];
@@ -66,26 +67,25 @@ async function matchedCharacterId(event) {
                 selectedNums.push(currentIndex)     
             }
             
-           // const selectedDatas = selectedNums.map(num => allData[num]);
-           const selectedDatas = selectedNums.map((num) => {
-                console.log("num:", num)
-           })
-            
+            // PREVENTING REPEAT IN ARRAY
+            const selectedDatas = selectedNums.map(num => allData[num]);
+            const uniqueNumbers = [...new Set(selectedDatas)];
+            console.log("uniquenumbers outside:", uniqueNumbers)
+            if(uniqueNumbers[0] !== undefined) {
+              const indexToRemove = uniqueNumbers.findIndex(character => character.id === matchedId.id);
+              uniqueNumbers.splice(indexToRemove, 1);
+            }  
+           
+            return uniqueNumbers
 
-            return selectedDatas
+        }
 
-        } 
-
-
+     localStorage.setItem("otherCharactersData" ,JSON.stringify(getRandomData()));
     
-        
-    localStorage.setItem("otherCharactersData" ,JSON.stringify(getRandomData()));
-    
-   // window.location.href = "character-details.html"
+    window.location.href = "character-details.html"
     
     
 }
-
 
   function characterDetailEventListener () {
     const charactersDiv = document.querySelector("#row-div");

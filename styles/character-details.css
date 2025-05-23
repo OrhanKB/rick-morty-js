@@ -53,3 +53,6 @@ left: -145px;
     transform: scaleX(-1);
     
 }
+.no-data-found {
+    margin-top: 80px;
+}
