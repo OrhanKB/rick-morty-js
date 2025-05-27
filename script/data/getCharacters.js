@@ -51,6 +51,7 @@
             
           button.style.display = "none";
         }
+        
         //pagination number adjuster to prevent error
         if (Number(params.get("page")) >= urlString.data.info.pages) {
           params.set("page", 1);

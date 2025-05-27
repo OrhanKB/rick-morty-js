@@ -34,8 +34,11 @@ left: -145px;
 }
 
 .details-name {
+    
     font-size: large;
      font-weight: 600;
+     text-overflow: ellipsis;
+     
 }
 
 .details-species {
@@ -56,3 +59,14 @@ left: -145px;
 .no-data-found {
     margin-top: 80px;
 }
+
+ .other-characters-html {
+    cursor: default;
+}
+
+.other-characters-html > * {
+    cursor: pointer;
+} 
+
+
+

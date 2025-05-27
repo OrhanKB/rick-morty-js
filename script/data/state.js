@@ -2,6 +2,7 @@
     urlOutside : "https://rickandmortyapi.com/api/character?",
     data : undefined,
     urlPages: undefined,
+    
   }
   
   export async function getCharacters ()  {

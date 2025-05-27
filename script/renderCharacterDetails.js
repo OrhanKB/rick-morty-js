@@ -1,5 +1,3 @@
-import { urlString } from "./data/state.js";
-
 
 const parseCharacterDetails = JSON.parse(localStorage.getItem("matchedId"));
 
@@ -75,13 +73,13 @@ function renderOtherCharacters() {
     parsedOtherCharactersData.forEach((character) => {
         
         otherCharactersHtml += `      
-            <div style="cursor: default" class="col-sm-4 mb-3"> 
-                <div style="cursor: pointer" class="d-flex align-items-center"> 
+            <div style = "margin: -15px; " class="col-sm-4 mb-1"> 
+                <div class="d-flex align-items-center other-characters-html" data-details-id=${character.id}> 
                     <img class="details-img rounded-circle" src="${character.image}"  alt="${character.name}" object-fit: cover;> 
                     <div class="details  flex-grow-1  overflow-hidden m-3"> 
-                        <p class="details-name mb-1 text-truncate">${character.name}</p>
-                        <p class="details-location mb-1 text-truncate">${character.location.name}</p>
-                        <p class="details-species text-truncate">${character.species}/${character.gender}</p>
+                        <p class="details-name mb-1">${character.name}</p>
+                        <p class="details-location mb-1 ">${character.location.name}</p>
+                        <p class="details-species">${character.species}/${character.gender}</p>
                     </div>
                     <a class="ms-2 d-flex align-items-center" href="#">
                         <img class="details-arrow" src="/public/arrow-89-24.png" alt="View" width="16">
@@ -98,8 +96,6 @@ const noDataFoundDiv = document.querySelector(".no-data-found");
 
 parsedOtherCharactersData.length === 0 ? parsedOtherCharactersData[0] = null :  [] ;
 parsedOtherCharactersData[0] === null  ?  noDataFoundDiv.style.opacity = 1 : [] ;
-
-
 
 renderOtherCharacters();
 
