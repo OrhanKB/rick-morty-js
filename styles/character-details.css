@@ -1,19 +1,4 @@
-.status-head {
-    font-weight: 600;
-    font-size:larger;
-    margin: 0px;
-}
-
-.status-input {
-    font-weight: 100;
-    font: italic;
-}
-
-.details p {
-    margin: 0;
-    min-width: max-content;
-}
-
+/* HEADER NAV */
 .arrow-left{
     top: 44px;
 left: -145px;
@@ -28,45 +13,99 @@ left: -145px;
     color: black;
 }
 
-.details-img {
-    width: 70px;
-    height: 70px;
+ .status-head {
+    font-weight: 600;
+    font-size:larger;
+    margin: 0px;
+}
+/* HEADER NAV */
+
+
+/* CONTAINER SETTINGS */
+.container-characters {
+  padding: 0 15px;
+  max-width: 1200px; 
+  margin: 0 auto; 
 }
 
-.details-name {
-    
+/* GRID SYSTEM */
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px; 
+  
+}
+
+/* CHARACTER CARDS */
+.character-card {
+  display: flex;
+  align-items: center;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80px;
+  cursor: default;
+}
+
+.character-card > * {
+    cursor: pointer;
+}
+
+.details-name {    
     font-size: large;
      font-weight: 600;
      text-overflow: ellipsis;
-     
 }
 
 .details-species {
     font-size: smaller;
-    font: italic;
-    
+    font: italic;   
 }
 
-.details-arrow {
-    display: flex;
-    position: relative;
+
+/* IMAGES */
+.character-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* TEXT */
+.character-info {
+    flex: 1;
+    min-width: 0; 
+}
+
+.character-info p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ARROW BTN */
+.character-arrow {
+  margin-left: 10px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  padding-left: 50px;
+}
+
+.character-arrow > img {
     width: 20px;
     height: 20px;
-    right: 60px;
-    transform: scaleX(-1);
-    
 }
+
+
+/* NO DATA */
 .no-data-found {
-    margin-top: 80px;
+    margin: 0px;
+  display: none;
+  text-align: center;
+  grid-column: 1 / -1;
 }
-
- .other-characters-html {
-    cursor: default;
-}
-
-.other-characters-html > * {
-    cursor: pointer;
-} 
 
 
 

@@ -71,31 +71,29 @@ function renderOtherCharacters() {
     }    
 
     parsedOtherCharactersData.forEach((character) => {
-        
-        otherCharactersHtml += `      
-            <div style = "margin: -15px; " class="col-sm-4 mb-1"> 
-                <div class="d-flex align-items-center other-characters-html" data-details-id=${character.id}> 
-                    <img class="details-img rounded-circle" src="${character.image}"  alt="${character.name}" object-fit: cover;> 
-                    <div class="details  flex-grow-1  overflow-hidden m-3"> 
-                        <p class="details-name mb-1">${character.name}</p>
-                        <p class="details-location mb-1 ">${character.location.name}</p>
-                        <p class="details-species">${character.species}/${character.gender}</p>
-                    </div>
-                    <a class="ms-2 d-flex align-items-center" href="#">
-                        <img class="details-arrow" src="/public/arrow-89-24.png" alt="View" width="16">
-                    </a>
-                </div>
-            </div>
-        `;
-    });
 
-    document.querySelector(".other-characters-row").innerHTML = otherCharactersHtml;
+        otherCharactersHtml += `
+            <div class="character-card" data-details-id=${character.id}>
+              <img src="${character.image}" alt="${character.name}">
+              <div class="character-info">
+                <p class="details-name">${character.name}</p>
+                <p class="details-location">${character.location.name}</p>
+                <p class="details-species">${character.species}/${character.gender}</p>
+              </div>
+              <a href="#" class="character-arrow">
+                <img src="/public/arrow-89-24.png" width="16" alt="View">
+              </a>
+            </div>
+            `;
+
+    });
+    document.querySelector(".characters-grid").innerHTML = otherCharactersHtml;
 }
 
 const noDataFoundDiv = document.querySelector(".no-data-found");
 
 parsedOtherCharactersData.length === 0 ? parsedOtherCharactersData[0] = null :  [] ;
-parsedOtherCharactersData[0] === null  ?  noDataFoundDiv.style.opacity = 1 : [] ;
+parsedOtherCharactersData[0] === null  ? noDataFoundDiv.style.display = "flex" : [] ;
 
 renderOtherCharacters();
 

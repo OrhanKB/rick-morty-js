@@ -1,17 +1,13 @@
 import { characterDetailEventListener } from "./characterDetails.js";
+import { urlString } from "./state.js";
   
-  /*  function denem123() {
-        const otherCharactersHTML = document.querySelector(".other-characters-row");
-        const requiredClassList = otherCharactersHTML.firstElementChild
-        const eventIdClassList =  ` .${requiredClassList.firstElementChild.classList[2]} ` ;
-        
-       // otherCharactersHTML.addEventListener("click", (event) => matchedCharacterId(event, eventIdClassList))
-    } */
+   // const containerSelector = ".other-characters-row";
+   // const childClassToMatch = "other-characters-html";
+     const containerSelector = ".characters-grid"
+     const childClassToMatch = "character-card"
+    characterDetailEventListener(containerSelector, `${childClassToMatch}`);
 
-    const containerSelector = ".other-characters-row";
-    const childClassToMatch = "other-characters-html";
 
-  //  characterDetailEventListener(containerSelector, `${childClassToMatch}`);
  
 
     

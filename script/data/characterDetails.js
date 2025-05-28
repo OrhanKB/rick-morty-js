@@ -6,15 +6,21 @@ import { urlString } from "./state.js";
     const eventTargetDiv = event.target.closest(childClassToMatch);
     const eventTargetObjectKey =  Object.keys(eventTargetDiv.dataset)[0];
     const eventId = Number(event.target.closest(childClassToMatch).dataset[eventTargetObjectKey]);
-    const charactersData = urlString.data.results;
-    console.log("characterdata:", charactersData);
-    console.log("urlstring:", urlString)
+     let charactersData = urlString.data.results;
+     console.log("eventid:", eventId)
+    //
+    const hasMatch = charactersData.find(character => character.id === eventId);
+    const noMatch = hasMatch === undefined;
 
+    if(noMatch) {
+        charactersData = JSON.parse(localStorage.getItem("otherCharactersData"));
+    }
+    //
     const matchedId = charactersData.find(character => character.id === eventId)
     localStorage.setItem("matchedId", JSON.stringify(matchedId));
     
     const characterUrl = JSON.parse(localStorage.getItem("matchedId")).location.url;
-     
+      
     async function otherCharacters() {
         try {
             //URL CONTROL
@@ -87,18 +93,9 @@ import { urlString } from "./state.js";
         
      localStorage.setItem("otherCharactersData" ,JSON.stringify(getRandomData()));
     
-     // window.location.href = "character-details.html"
+       window.location.href = "character-details.html"
     
 }
-
-/*    export function characterDetailEventListener (containerSelector = "#row-div", childClassToMatch = "cart-html") {
-
-    const container = document.querySelector(containerSelector);
-    if(!container) return;
-
-    container.addEventListener("click", (event) => matchedCharacterId(event, ` .${childClassToMatch} `) );
-
-} */
 
     const containerSelector = "#row-div";
     const childClassToMatch = "cart-html";
