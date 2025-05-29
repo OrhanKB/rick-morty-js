@@ -64,6 +64,7 @@
         renderPagination();
         
       }
+      
       function setupEventListeners() {
         
         const container = document.querySelector(".js-container-btns"); 

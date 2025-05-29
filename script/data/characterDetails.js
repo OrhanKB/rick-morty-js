@@ -1,4 +1,5 @@
 import { urlString } from "./state.js";
+import { saveState, restoreState} from "./historyStack.js";
 //LOCALSTORAGE FOR CHARACTER DETAILS PAGE
 
  async function matchedCharacterId(event, childClassToMatch) {
@@ -89,11 +90,12 @@ import { urlString } from "./state.js";
             return uniqueNumbers
 
         }
-           
-        
-     localStorage.setItem("otherCharactersData" ,JSON.stringify(getRandomData()));
+     
+      localStorage.setItem("otherCharactersData" ,JSON.stringify(getRandomData()));
+      const otherCharactersParsed = JSON.parse(localStorage.getItem("otherCharactersData"));
+        saveState(otherCharactersParsed);
     
-       window.location.href = "character-details.html"
+         window.location.href = "character-details.html"
     
 }
 
@@ -108,8 +110,15 @@ import { urlString } from "./state.js";
 
         container.addEventListener("click", (event) => {
             matchedCharacterId(event , ` .${childClassToMatch} `)
-        })
+        });
+
     }
+
+    const arrowLeftDiv =  document.querySelector(".arrow-left");
+    arrowLeftDiv.addEventListener("click", (e) => {
+        restoreState();
+        console.log("e target:", e.target);
+    })
 
 characterDetailEventListener(containerSelector, childClassToMatch);
 
