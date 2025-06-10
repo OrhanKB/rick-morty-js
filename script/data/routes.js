@@ -7,7 +7,6 @@ export const routerConfig = {
     "/script/": homePage,
     "/script/character": charactersPage,
     "/script/character/:id": characterDetailsPage,
-    "/script/locations":  null,
     "/script/favorites":  null,
     "*": homePage
 }

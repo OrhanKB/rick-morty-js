@@ -68,11 +68,9 @@ const renderCharacterDetailPage = async () => {
     
 
     //OTHER CHARACTERS 
-    const otherCharsElement = await createOtherCharacters(state.character);
-    const otherCharsDiv = container.querySelector(".characters-grid");
+    const otherCharsElement = await createOtherCharacters(state.character, container);
+    const otherCharsDiv = container.querySelector(".container-characters");
     otherCharsDiv.appendChild(otherCharsElement);
-    
-    
 
     return container;
 }

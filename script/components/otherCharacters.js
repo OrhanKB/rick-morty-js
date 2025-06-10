@@ -1,10 +1,9 @@
+import { router } from "../data/route.js";
 
 
-
-
-
-export const createOtherCharacters = async (character) => {
-    let container = document.createElement("div");
+export const createOtherCharacters = async (character, container) => {
+   // let container = document.createElement("div");
+   let containerGrid = await container.querySelector(".characters-grid");
     
 
     const fetchOthers = character.location.url
@@ -53,27 +52,20 @@ export const createOtherCharacters = async (character) => {
     const randomDataArray = getRandomData();
     
 
-   /* async function fetchSequantially() {
-        const randomCharArray = [];
-        for(let url of randomDataArray) {
-            try{
-                const response = await fetch(url);
-                const data = await response.json();
-                randomCharArray.push(data);
-                
-            } catch(error) {
-                console.log("error:", error)
-            }
-        }
-        
-        return randomCharArray;    
-    } */
-
     async function fetchSequantially() {
             try {   
-                const fetchPromises = randomDataArray.map(url =>  fetch(url).then(response => response.json()) );
-                const randomCharArray = await Promise.all(fetchPromises)
-                console.log("randomchararray:", randomCharArray);
+                const fetchPromises = randomDataArray.map(url =>  fetch(url).then(response => response.json()));
+                console.log("fetchpromises:", fetchPromises);
+                const charNoFoundDiv = containerGrid.firstChild.nextElementSibling
+                 fetchPromises.length <= 1 ? charNoFoundDiv.style.display = "flex" 
+                 : charNoFoundDiv.style.display = "none" ;
+
+                const randomCharArray = await Promise.all(fetchPromises);
+               
+                const matchedChar = randomCharArray.find(char => char.id === character.id);
+                const indexOfMatchedChar = randomCharArray.indexOf(matchedChar);
+                randomCharArray.splice(indexOfMatchedChar, 1);
+                console.log("rancomchararray:", randomCharArray);
                 return randomCharArray;    
             } catch(error) {    
                 console.log("error", error)
@@ -85,9 +77,14 @@ export const createOtherCharacters = async (character) => {
     
    // let html = "";
     randomizedCharacterData.forEach((character) => {
-         container.innerHTML += `
-         <div class="character-card" data-details-id=${character.id} data-role="details-card">
-              <img src="${character.image}" alt="${character.name}">
+        const container = document.createElement("div");
+        container.className = "character-card"
+        container.setAttribute("data-details-id", character.id);
+        container.setAttribute("data-role", "details-card");
+        container.setAttribute("data-route", router.buildUrl({}, character.id))
+
+        container.innerHTML += `
+            <img src="${character.image}" alt="${character.name}">
               <div class="character-info">
                 <p class="details-name">${character.name}</p>
                 <p class="details-location">${character.location.name}</p>
@@ -96,9 +93,11 @@ export const createOtherCharacters = async (character) => {
               <a href="#" class="character-arrow">
                 <img src="/public/arrow-89-24.png" width="16" alt="View">
               </a>
-        </div>
-        ` 
+        `
+        
+        containerGrid.appendChild(container)
+       
     });
    
-    return container;
+    return containerGrid;
 }

@@ -4,7 +4,7 @@
     prevUrl: null,
 }
 
-// bu kısım route u initliyor ve click handle lıyor
+// init route and handle clicks
 export function initRouter(routes) {
     route.allRoutes = routes;
 
@@ -48,11 +48,11 @@ const handleNavigation = async () => {
     
     locationPathname === "/index.html" ? locationPathname = "/" : "*" ;
    
-    // İlk önce tam eşleştirme dene
+    
     let matchedRoute = route.allRoutes[locationPathname];
     let extractedId = null;
     
-    // Tam eşleştirme yoksa dynamic route ara
+    // dynamic route 
     if (!matchedRoute) {
         for (const routePath in route.allRoutes) {
             if (routePath.includes(':id')) {
@@ -99,7 +99,20 @@ const handleNavigation = async () => {
 
     //pathway updater
     const navigate = (route) => {
-    const path = route === "index.html" ? "/" : `${route}`;
+    let path = route === "index.html" ? "/" : `${route}`;
+    
+    //UPDATING ID PATH PARAMETER
+    if (path.includes('/character/')) {
+        // reset ID parameter,  get /character pathway
+        const segments = path.split('/');
+        
+        // get last segment(latest id);
+        const lastSegment = segments[segments.length - 1];
+        if (lastSegment && !isNaN(lastSegment)) {
+            path = `/script/character/${lastSegment}`; 
+        }
+    }
+    
     window.history.pushState({}, "", path);    
     
     handleNavigation();
