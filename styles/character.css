@@ -1,0 +1,202 @@
+/* @media(min-width: 1570px) {
+    .col-xxxl-3 {
+        flex: 0 0 16.6666667%;
+        max-width: 16.6666667;
+    }
+}
+
+body {
+    background-color: rgb(52, 52, 52);
+}
+
+.border {
+    border: 1px black solid;
+    width: 340px;
+    height: 63px;
+    border-radius: 30px;
+    background-color: black;
+    color: black;
+}
+
+.arrow-left{
+    top: 44px;
+left: -145px;
+}
+
+.rounded-pill {
+    width: 100px;
+}
+
+[class^="card-img"] {
+    margin-top: 10px;
+    border-radius: 15px;
+    width: 275px;
+    height: 230px;
+    align-self: center;
+}
+
+.card-body {
+    margin-left: 10px;
+    color: white;
+}
+ 
+ .col-xl-4 {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    width: max-content;
+    margin-left: 20px;
+    
+    
+} 
+
+.card{
+    padding: 5px;
+    background: #27272a;
+    justify-self: center;
+}
+
+.activity > img, .entity > img {
+    width: 20px;
+    height: 20px;
+}
+
+span{
+    padding-right: 10px;
+}
+
+.favorite {
+    margin-right: 5px;
+    padding: 0;
+    cursor: pointer;
+    
+    
+}
+
+.favorite > img {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(68, 68, 68);
+}
+
+
+#alive-btn > span, #dead-btn > span, #unkown-btn > span {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    top: -10px;
+    left: 70px;
+    background-color: #27272a;
+    display: none;
+}
+
+div > span {
+    margin-left: 5px;
+}
+*/
+
+@media(min-width: 1570px) {
+    .col-xxxl-3 {
+        flex: 0 0 16.6666667%;
+        max-width: 16.6666667;
+    }
+}
+
+body {
+    background-color: rgb(52, 52, 52);
+}
+
+body.characters-page {
+    background-color: rgb(68, 68, 68);
+}
+
+ .border {
+    border: 1px black solid;
+    width: 340px;
+    height: 63px;
+    border-radius: 30px;
+    background-color: black;
+    color: black;
+}
+
+.arrow-left{
+    top: 44px;
+    left: -145px;
+}
+
+.rounded-pill {
+    width: 100px;
+}
+
+
+
+[class^="card-img"] {
+    margin-top: 10px;
+    border-radius: 15px;
+    width: 275px;
+    height: 230px;
+    align-self: center;
+}
+
+.card-body {
+    margin-left: 10px;
+    color: white;
+}
+
+.col-xl-4 {
+    padding-top: 10px;
+   /* width: 350px; */
+   max-width: 350px;
+    
+} 
+
+.card{
+    background: #27272a;
+    padding: 5px;
+    justify-self: center; 
+    cursor: pointer;
+    
+    
+}
+
+.activity > img, .entity > img {
+    width: 20px;
+    height: 20px;
+}
+
+span{
+    padding-right: 10px;
+}
+
+.favorite {
+    margin-right: 5px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.favorite > img {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(68, 68, 68);
+}
+
+#alive-btn > span, #dead-btn > span, #unkown-btn > span {
+    width: 25px;
+    height: 25px;
+    top: -10px;
+    left: 70px;
+    background-color: #3e3e41;
+    display: none;
+}
+
+div > span {
+    margin-left: 5px;
+} 
+
+
+
+

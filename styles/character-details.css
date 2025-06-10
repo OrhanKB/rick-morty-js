@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(52, 52, 52);
+}
+
 /* HEADER NAV */
 .arrow-left{
     top: 44px;
@@ -17,6 +21,7 @@ left: -145px;
     font-weight: 600;
     font-size:larger;
     margin: 0px;
+
 }
 /* HEADER NAV */
 
@@ -30,7 +35,7 @@ left: -145px;
 
 /* GRID SYSTEM */
 .characters-grid {
-  display: grid;
+  display: grid; 
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 15px; 
   
