@@ -34,7 +34,7 @@ const renderCharacterDetailPage = async () => {
         <a href="#" class="arrow-left position-relative">
             <img src="/public/arrow-89-24.png" alt="">
         </a>
-        <a class="border border-black d-flex justify-content-center pt-1" href="/pages/index.html">
+        <a class="border border-black d-flex justify-content-center pt-1" href="/script/index.html">
         <img style="width: 160px; height: 50px;" src="/public/logo.png" alt="">
         </a>
     </header>

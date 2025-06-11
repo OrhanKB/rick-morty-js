@@ -4,6 +4,8 @@
     prevUrl: null,
 }
 
+
+
 // init route and handle clicks
 export function initRouter(routes) {
     route.allRoutes = routes;
@@ -14,6 +16,59 @@ export function initRouter(routes) {
 
     //handle link clicks
     document.addEventListener("click", (e) => {
+
+        // FAVORITE BUTTON CONTROL
+        const favBtn = e.target.closest(".favorite");
+        if(favBtn) {
+            e.preventDefault();
+            e.stopPropagation(); 
+            
+            const existingFavs = JSON.parse(localStorage.getItem("favDivs")) || [];
+            
+            // data-cart-id
+            const cartElement = favBtn.closest("[data-cart-id]");
+            const cartId = cartElement.getAttribute("data-cart-id");
+            
+            // get gridwrapper
+            const gridWrapper = cartElement.parentElement;
+            
+            // toggle fav icon
+            const favIcon = favBtn.children[0];
+            const isFavorited = favIcon.classList.contains("favorited");
+            
+            if (!isFavorited) {
+                // add new fav
+                const favObject = {
+                    id: cartId,
+                    html: gridWrapper.outerHTML
+                };
+                existingFavs.push(favObject);
+                localStorage.setItem("favDivs", JSON.stringify(existingFavs));
+                favIcon.classList.add("favorited");
+            } else {
+                // remove from favs
+                const index = existingFavs.findIndex(fav => fav.id === cartId);
+                if (index !== -1) {
+                    existingFavs.splice(index, 1);
+                    localStorage.setItem("favDivs", JSON.stringify(existingFavs));
+                    favIcon.classList.remove("favorited");
+                }
+                
+                // remove fav from DOM
+                if (window.location.pathname.includes('/favorites')) {
+                    gridWrapper.remove();
+                    
+                    // no favorites
+                    if (existingFavs.length === 0) {
+                        const rowDiv = document.querySelector("#row-div");
+                        if (rowDiv) {
+                            rowDiv.innerHTML = '<div class="col-12 text-center"><h4 class="text-white">No favorites</h4></div>';
+                        }
+                    }
+                }
+            }
+            return; 
+        }
 
         const routeElement = e.target.closest("[data-route]");
         
@@ -34,7 +89,12 @@ export function initRouter(routes) {
             const newPath = url.pathname + url.search;
             navigate(newPath);
         }
+
+        
+
     });
+
+
 
 }
 
@@ -56,13 +116,13 @@ const handleNavigation = async () => {
     if (!matchedRoute) {
         for (const routePath in route.allRoutes) {
             if (routePath.includes(':id')) {
-                // :id kısmını regex ile değiştir
+                // change :id part with regex
                 const pattern = routePath.replace(':id', '\\d+');
                 const regex = new RegExp(`^${pattern}$`);
                 
                 if (regex.test(locationPathname)) {
                     matchedRoute = route.allRoutes[routePath];
-                    // ID'yi çıkar
+                    // remove id
                     extractedId = locationPathname.split('/').pop();
                     break;
                 }
@@ -70,7 +130,7 @@ const handleNavigation = async () => {
         }
     }
     
-    // Hiçbiri yoksa wildcard
+    // wildcard
     if (!matchedRoute) {
         matchedRoute = route.allRoutes["*"];
     }
@@ -85,16 +145,55 @@ const handleNavigation = async () => {
         route.prevUrl = currentFullUrl;
         const app = document.getElementById("app");
         
-        app.innerHTML = "";
+        // Loading state 
+        app.innerHTML = `
+            <div style="
+                background-color: rgb(52, 52, 52); 
+                height: 100vh; 
+                display: flex; 
+                justify-content: center; 
+                align-items: center;
+                color: white;
+                font-family: Arial, sans-serif;
+            ">
+                <div>Loading...</div>
+            </div>
+        `;
         
         try {
-            // ID varsa parametre olarak geç
+            // pass as parameter if have ID
             const content = extractedId ? await matchedRoute(extractedId) : await matchedRoute();
+            
+            // clean loading state
+            app.innerHTML = "";
             app.appendChild(content);
+            
+            // restore favs
+            restoreFavorites();
         } catch(error) {    
             console.log("Error:", error)
         }
     }
+} 
+
+// restoring favs func
+
+function restoreFavorites() {
+    const savedFavs = JSON.parse(localStorage.getItem("favDivs")) || [];
+    
+    // Clear all favorite states first
+    document.querySelectorAll('.favorite img').forEach(img => {
+        img.classList.remove('favorited');
+    });
+    
+    // Then restore only the favorites that exist in the current page
+    savedFavs.forEach(favObj => {
+        const cartId = favObj.id;
+        const favBtn = document.querySelector(`[data-cart-id="${cartId}"] .favorite`);
+        if (favBtn && favBtn.children[0]) {
+            favBtn.children[0].classList.add("favorited");
+        }
+    });
 } 
 
     //pathway updater
@@ -167,6 +266,8 @@ export const router = {
     navigate: navigate,
     buildUrl: buildUrl
 }
+
+
 
 
 

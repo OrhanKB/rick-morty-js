@@ -8,7 +8,7 @@ export const createCharacterCard = (character) => {
     card.innerHTML = `
     <div class="card" data-cart-id="${character.id}" data-route="${router.buildUrl({}, character.id)}">
             <span id="favorite-${character.id}" class="favorite position-absolute end-0 mt-4 px-4">
-                <img src="/public/icons8-heart-32.png" alt="">
+                <img class="fav-icon" src="/public/icons8-heart-32.png" alt="">
             </span>
             <img class="card-img-top p-2" src="${character.image}" alt="Card image cap">
             <div class="card-body p-2">

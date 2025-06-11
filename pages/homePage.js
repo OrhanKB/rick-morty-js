@@ -22,7 +22,6 @@ const renderHomePage = async () => {
             <p>Characters, locations, episodes and more.</p>
             <div class="button-container">
                 <button class="btn btn-light" data-route="character">Characters</button>
-                <button class="btn btn-secondary" data-route="locations">Locations</button>
                 <button class="btn btn-danger" data-route="favorites">My Favorites</button>
             </div>
         </div>

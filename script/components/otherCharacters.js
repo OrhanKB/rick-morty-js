@@ -2,11 +2,16 @@ import { router } from "../data/route.js";
 
 
 export const createOtherCharacters = async (character, container) => {
-   // let container = document.createElement("div");
+   
    let containerGrid = await container.querySelector(".characters-grid");
     
 
     const fetchOthers = character.location.url
+    if(!fetchOthers) {
+        containerGrid.firstChild.nextElementSibling.style.display = "flex";
+        return containerGrid;
+    }
+    
     
     const loadOthers = async () => {
         try {
@@ -50,12 +55,10 @@ export const createOtherCharacters = async (character, container) => {
     }
 
     const randomDataArray = getRandomData();
-    
 
     async function fetchSequantially() {
             try {   
                 const fetchPromises = randomDataArray.map(url =>  fetch(url).then(response => response.json()));
-                console.log("fetchpromises:", fetchPromises);
                 const charNoFoundDiv = containerGrid.firstChild.nextElementSibling
                  fetchPromises.length <= 1 ? charNoFoundDiv.style.display = "flex" 
                  : charNoFoundDiv.style.display = "none" ;
@@ -65,7 +68,6 @@ export const createOtherCharacters = async (character, container) => {
                 const matchedChar = randomCharArray.find(char => char.id === character.id);
                 const indexOfMatchedChar = randomCharArray.indexOf(matchedChar);
                 randomCharArray.splice(indexOfMatchedChar, 1);
-                console.log("rancomchararray:", randomCharArray);
                 return randomCharArray;    
             } catch(error) {    
                 console.log("error", error)

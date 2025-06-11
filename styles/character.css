@@ -197,6 +197,16 @@ div > span {
     margin-left: 5px;
 } 
 
+.fav-icon {
+    content: url("/public/icons8-heart-32.png");
+}
+
+.fav-icon.favorited {
+    content: url("/public/icons8-heart-64.png");
+}
+
+
+
 
 
 
