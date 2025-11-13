@@ -2,6 +2,9 @@
 
 A modern Single Page Application (SPA) built with **Vanilla JavaScript** that showcases characters from the Rick and Morty universe using the Rick and Morty API.
 
+## [🌐 Demo Link](https://rick-morty-js.vercel.app/)
+[Click here to view the live application](https://rick-morty-js.vercel.app/) deployed on Vercel 
+
 <div align="center">
   <img src="./public/homepage.jpeg" alt="Home Page" width="45%" />
   <img src="./public/characters.jpeg" alt="Characters Page" width="45%" />
