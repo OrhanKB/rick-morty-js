@@ -5,9 +5,9 @@ import { favoritesPage } from "../../pages/favoritesPage.js"
 
 
 export const routerConfig = {
-    "/script/": homePage,
-    "/script/character": charactersPage,
-    "/script/character/:id": characterDetailsPage,
-    "/script/favorites":  favoritesPage,
+    "/": homePage,
+    "/character": charactersPage,
+    "/character/:id": characterDetailsPage,
+    "/favorites":  favoritesPage,
     "*": homePage
 }

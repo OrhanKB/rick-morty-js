@@ -8,7 +8,7 @@ const renderHomePage = async () => {
 
     container.innerHTML = `
          <header class="d-flex justify-content-center mt-4">
-            <a href="#">
+            <a href="">
                 <img style="width: 160px; height: 50px;" src="/public/logo.png" alt="">
             </a>
         </header>
@@ -21,8 +21,8 @@ const renderHomePage = async () => {
             <h3>Rick and Morty Universe <b class="text-info">API</b></h3>
             <p>Characters, locations, episodes and more.</p>
             <div class="button-container">
-                <button class="btn btn-light" data-route="character">Characters</button>
-                <button class="btn btn-danger" data-route="favorites">My Favorites</button>
+                <button class="btn btn-light" data-route="/character">Characters</button>
+                <button class="btn btn-danger" data-route="/favorites">My Favorites</button>
             </div>
         </div>
     `

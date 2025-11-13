@@ -12,10 +12,20 @@ export function initRouter(routes) {
 
     handleNavigation();
 
+    // Listen for hash changes instead of popstate
+    window.addEventListener("hashchange", handleNavigation);
     window.addEventListener("popstate", handleNavigation)
 
     //handle link clicks
     document.addEventListener("click", (e) => {
+
+        // ARROW LEFT BACK BUTTON
+        const arrowLeft = e.target.closest(".arrow-left");
+        if(arrowLeft) {
+            e.preventDefault();
+            window.history.back();
+            return;
+        }
 
         // FAVORITE BUTTON CONTROL
         const favBtn = e.target.closest(".favorite");
@@ -101,12 +111,21 @@ export function initRouter(routes) {
 
 //loads page
 const handleNavigation = async () => {
-    const locationPathname = window.location.pathname;
+    // Use hash for routing
+    let locationPathname = window.location.hash.slice(1) || '/';
     const locationSearch = window.location.search;
     
     const currentFullUrl = locationPathname + locationSearch;
     
-    locationPathname === "/index.html" ? locationPathname = "/" : "*" ;
+    // Remove /script prefix if exists in hash
+    if(locationPathname.startsWith('/script')) {
+        locationPathname = locationPathname.replace('/script', '');
+    }
+    
+    // Default to home if empty
+    if(locationPathname === '' || locationPathname === '/') {
+        locationPathname = '/';
+    }
    
     
     let matchedRoute = route.allRoutes[locationPathname];
@@ -135,8 +154,10 @@ const handleNavigation = async () => {
         matchedRoute = route.allRoutes["*"];
     }
 
-    const parts = window.location.pathname.split("/");    
-    const pageName = parts[2];
+    // Get page name from hash for CSS loading
+    const hashPath = window.location.hash.slice(1) || '/';
+    const parts = hashPath.split("/");    
+    const pageName = parts[1]; // Get first part after /
     
     loadCssStyle(pageName);    
 
@@ -200,6 +221,11 @@ function restoreFavorites() {
     const navigate = (route) => {
     let path = route === "index.html" ? "/" : `${route}`;
     
+    // Remove /script prefix if exists
+    if(path.startsWith('/script')) {
+        path = path.replace('/script', '');
+    }
+    
     //UPDATING ID PATH PARAMETER
     if (path.includes('/character/')) {
         // reset ID parameter,  get /character pathway
@@ -208,18 +234,20 @@ function restoreFavorites() {
         // get last segment(latest id);
         const lastSegment = segments[segments.length - 1];
         if (lastSegment && !isNaN(lastSegment)) {
-            path = `/script/character/${lastSegment}`; 
+            path = `/character/${lastSegment}`; 
         }
     }
     
-    window.history.pushState({}, "", path);    
-    
-    handleNavigation();
+    // Use hash navigation
+    window.location.hash = path;
 } 
 
 //URL PARAMETER UPDATER
  function buildUrl(newParams = {}, id) {
     const url = new URL(window.location);
+    
+    // Get current hash path
+    let hashPath = window.location.hash.slice(1) || '/character';
 
     Object.entries(newParams).forEach(([key, value]) => {
         if(value === null || value === undefined ) {
@@ -233,11 +261,12 @@ function restoreFavorites() {
         const params = [...url.searchParams.keys()];
         params.forEach(param => url.searchParams.delete(param));
         
-        url.pathname = `${url.pathname}/${id}`;
-        return url.pathname;
+        // For character details, use /character/:id format
+        return `/character/${id}`;
     }
     
-    return url.pathname + url.search;
+    // Return hash path with query parameters
+    return hashPath + url.search;
 } 
 
 
@@ -247,13 +276,21 @@ function loadCssStyle(pageName) {
         oldLink.remove();
     }
     
-    pageName === "" || pageName === undefined  || pageName === "index.html" ?
-    pageName = "homepage" : pageName = pageName;
+    // Determine CSS file based on page name
+    if(pageName === "" || pageName === undefined) {
+        pageName = "homepage";
+    } else if(pageName === "character") {
+        // Check if it's character detail (has ID) or character list
+        const hashPath = window.location.hash.slice(1);
+        const pathParts = hashPath.split("/").filter(p => p);
+        pageName = pathParts.length >= 2 && !isNaN(pathParts[1]) ? "character-details" : "character";
+    } else if(pageName === "favorites") {
+        pageName = "favorites";
+    }
    
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.id = "dynamic-page-css";
-     window.location.pathname.split("/").length === 4 ? pageName = "character-details" : pageName = pageName ;
     link.href = `/styles/${pageName}.css`;
     
     document.head.appendChild(link);

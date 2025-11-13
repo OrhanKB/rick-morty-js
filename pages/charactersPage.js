@@ -13,7 +13,8 @@ let state = {
 
 const loadCharacters = async () => {
     try {
-        const path = window.location.pathname.split("script")[1];
+        // Use hash for routing
+        const path = window.location.hash.slice(1) || '/character';
         const query = window.location.search;
         const urlParams = path + query;        
         const response = await fetch(`https://rickandmortyapi.com/api${urlParams}`);
@@ -49,10 +50,10 @@ const  renderCharactersPage = async () => {
         container.innerHTML = `
         <header class="d-flex flex-column align-items-center">
 
-            <a href="#" class="arrow-left position-relative">
+            <a href="" class="arrow-left position-relative">
                 <img src="/public/arrow-89-24.png" alt="">
             </a>
-            <a class="border border-black d-flex justify-content-center pt-1" href="/script/index.html">
+            <a class="border border-black d-flex justify-content-center pt-1" href="#/" data-route="/">
             <img style="width: 160px; height: 50px;" src="/public/logo.png" alt="">
             </a>
             <h2 class="mt-3 text-white">Characters</h2>

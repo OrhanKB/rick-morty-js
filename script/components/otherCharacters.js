@@ -92,7 +92,7 @@ export const createOtherCharacters = async (character, container) => {
                 <p class="details-location">${character.location.name}</p>
                 <p class="details-species">${character.species}/${character.gender}</p>
               </div>
-              <a href="#" class="character-arrow">
+              <a href="" class="character-arrow">
                 <img src="/public/arrow-89-24.png" width="16" alt="View">
               </a>
         `

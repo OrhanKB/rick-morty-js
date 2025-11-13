@@ -7,9 +7,6 @@ window.app = router
 
 
 window.addEventListener("DOMContentLoaded", () => {
-    
-    
-
     initRouter(routerConfig);
 });
 
