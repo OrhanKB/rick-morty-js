@@ -13,10 +13,9 @@ let state = {
 
 const loadCharacters = async () => {
     try {
-        // Use hash for routing
-        const path = window.location.hash.slice(1) || '/character';
-        const query = window.location.search;
-        const urlParams = path + query;        
+        const hashFull = window.location.hash.slice(1) || '/character';
+        const [path, query] = hashFull.includes('?') ? hashFull.split('?') : [hashFull, ''];
+        const urlParams = query ? `${path}?${query}` : path;        
         const response = await fetch(`https://rickandmortyapi.com/api${urlParams}`);
         
         const data = await response.json();
@@ -92,7 +91,9 @@ const  renderCharactersPage = async () => {
         const insideDiv = container.querySelector(".main");
         insideDiv.prepend(createFilterNav());
 
-        const urlParams = new URLSearchParams(window.location.search);
+        const hashFull = window.location.hash.slice(1) || '/character';
+        const query = hashFull.includes('?') ? hashFull.split('?')[1] : '';
+        const urlParams = new URLSearchParams(query);
         
         if(urlParams.has("status")) {
             const activeStatus = urlParams.get("status");

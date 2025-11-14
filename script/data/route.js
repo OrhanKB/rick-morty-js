@@ -93,10 +93,13 @@ export function initRouter(routes) {
             e.preventDefault();
             const filterKey = e.target.getAttribute("data-remove-filter");
 
-            const url = new URL(window.location);
-            url.searchParams.delete(filterKey);
+            const hashFull = window.location.hash.slice(1) || '/character';
+            const [path, query] = hashFull.includes('?') ? hashFull.split('?') : [hashFull, ''];
+            const params = new URLSearchParams(query);
+            params.delete(filterKey);
 
-            const newPath = url.pathname + url.search;
+            const queryString = params.toString();
+            const newPath = queryString ? `${path}?${queryString}` : path;
             navigate(newPath);
         }
 
@@ -111,18 +114,17 @@ export function initRouter(routes) {
 
 //loads page
 const handleNavigation = async () => {
-    // Use hash for routing
-    let locationPathname = window.location.hash.slice(1) || '/';
-    const locationSearch = window.location.search;
+    const hashFull = window.location.hash.slice(1) || '/';
+    let [locationPathname, locationSearch] = hashFull.includes('?') 
+        ? [hashFull.split('?')[0], '?' + hashFull.split('?')[1]] 
+        : [hashFull, ''];
     
     const currentFullUrl = locationPathname + locationSearch;
     
-    // Remove /script prefix if exists in hash
     if(locationPathname.startsWith('/script')) {
         locationPathname = locationPathname.replace('/script', '');
     }
     
-    // Default to home if empty
     if(locationPathname === '' || locationPathname === '/') {
         locationPathname = '/';
     }
@@ -244,29 +246,31 @@ function restoreFavorites() {
 
 //URL PARAMETER UPDATER
  function buildUrl(newParams = {}, id) {
-    const url = new URL(window.location);
-    
-    // Get current hash path
     let hashPath = window.location.hash.slice(1) || '/character';
-
+    
+    if(hashPath.includes('?')) {
+        hashPath = hashPath.split('?')[0];
+    }
+    
+    const currentSearch = window.location.hash.includes('?') 
+        ? window.location.hash.split('?')[1] 
+        : '';
+    const params = new URLSearchParams(currentSearch);
+    
     Object.entries(newParams).forEach(([key, value]) => {
-        if(value === null || value === undefined ) {
-            url.searchParams.delete(key);
+        if(value === null || value === undefined) {
+            params.delete(key);
         } else {
-            url.searchParams.set(key, value);
+            params.set(key, value);
         }
     });
     
     if(id) {
-        const params = [...url.searchParams.keys()];
-        params.forEach(param => url.searchParams.delete(param));
-        
-        // For character details, use /character/:id format
         return `/character/${id}`;
     }
     
-    // Return hash path with query parameters
-    return hashPath + url.search;
+    const queryString = params.toString();
+    return queryString ? `${hashPath}?${queryString}` : hashPath;
 } 
 
 
